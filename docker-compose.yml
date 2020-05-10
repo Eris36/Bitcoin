@@ -1,0 +1,31 @@
+version: '3.3'
+
+volumes:
+  rabbit_data:
+  
+services:
+ web:
+   image: python:3.8
+   command: sh -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8000"
+   volumes:
+     - /c/Users/User/Bitcoin:/code
+   ports:
+     - 8000:8000
+   working_dir: /code
+
+ #cel:
+   #image: python:3.8
+   #command: sh -c ""
+   #volumes:
+     #- /c/Users/User/Bitcoin:/code
+   #working_dir: /code
+   #depends_on:
+     #- web
+     
+ rabb:
+   image: rabbitmq
+   volumes:
+     - rabbit_data:/var/lib/rabbitmq
+   ports:
+     - 5671:5671
+     - 5672:5672

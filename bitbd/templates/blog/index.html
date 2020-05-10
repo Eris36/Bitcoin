@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Прайс Биткойна</title>
+</head>
+<body>
+
+{% for post in posts %}
+    <dev>
+        <p>Обновлено: {{ post.created_date }}</p>
+        <p>Волюта: {{ post.name }}</p>
+        <p>Цена: {{ post.price }} $</p>
+        </br>
+     </dev>
+
+
+{% endfor %}
+
+<form action="{% url 'update-money' %}" target="">
+   <button>Обновить</button>
+  </form>
+
+</body>
+</html>
