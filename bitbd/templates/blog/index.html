@@ -18,8 +18,10 @@
 {% endfor %}
 
 <form action="{% url 'update-money' %}" target="">
-   <button>Обновить</button>
+   <button>Обновить через tasks</button>
   </form>
-
+<form action="{% url 'get_price' %}" target="">
+   <button>Обновить принудительно</button>
+  </form>
 </body>
 </html>
