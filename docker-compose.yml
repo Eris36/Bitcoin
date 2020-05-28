@@ -11,11 +11,11 @@ services:
      - .:/code
    ports:
      - 8000:8000
-   working_dir: bitbd/code
+   working_dir: /code
 
  cel:
    image: python:3.8
-   command: sh -c "celery -A tasks worker -l info -n worker"
+   command: sh -c "celery -A proj worker -l info"
    volumes:
      - .:/code
    working_dir: /code
