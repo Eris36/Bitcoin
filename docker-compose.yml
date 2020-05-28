@@ -8,19 +8,19 @@ services:
    image: python:3.8
    command: sh -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8000"
    volumes:
-     - /c/Users/User/Bitcoin:/code
+     - .:/code
    ports:
      - 8000:8000
-   working_dir: /code
+   working_dir: bitbd/code
 
- #cel:
-   #image: python:3.8
-   #command: sh -c ""
-   #volumes:
-     #- /c/Users/User/Bitcoin:/code
-   #working_dir: /code
-   #depends_on:
-     #- web
+ cel:
+   image: python:3.8
+   command: sh -c "celery -A tasks worker -l info -n worker"
+   volumes:
+     - .:/code
+   working_dir: /code
+   depends_on:
+     - rabb
      
  rabb:
    image: rabbitmq
@@ -28,4 +28,4 @@ services:
      - rabbit_data:/var/lib/rabbitmq
    ports:
      - 5671:5671
-     - 5672:5672
+     - 15672:15672

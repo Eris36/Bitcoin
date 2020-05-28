@@ -2,11 +2,18 @@ from celery import Celery
 import requests
 import json
 from bitbd.models import Post
+from celery.schedules import crontab
+from celery.task import periodic_task
+
+
 
 app = Celery('tasks', broker='amqp://guest@rabb//')
 
 
-@app.task
+
+
+@periodic_task(run_every=(crontab( minute="1")))
+# @app.task
 def get_money():
     url_param = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest"
 
